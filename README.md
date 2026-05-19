@@ -255,3 +255,8 @@ Q: Why use analogWrite instead of ledc functions ?
 A: On the ESP32 the preferred, native way to generate PWM is the LEDC API (`ledcSetup`, `ledcAttachPin`, `ledcWrite`) because it's hardware PWM and offers better control (frequency, resolution, multiple channels). However, in this project **`analogWrite()`**** was used as a deliberate workaround** for the following reason:
 
 * Despite multiple attempts to update/reinstall the ESP32 board package and related libraries, the LEDC/`ledc` functions would not compile on the developer's environment. That prevented successful building of the app.
+
+
+# License
+
+Open-source and free to modify.
