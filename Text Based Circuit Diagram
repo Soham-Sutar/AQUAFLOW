@@ -1,0 +1,54 @@
+```
+Text-based Circuit Diagram (ESP32 WROOM-32 + L298N + Soil Sensor)
+
+Power Connections:
+------------------
+(External 12V Power Supply)
+   +12V  ------------------>  L298N 12V (VMS)
+   GND   ------------------>  L298N GND
+                            |
+                            +-->  ESP32 GND (Common Ground)
+                            +-->  Soil Sensor GND
+
+ESP32 Power:
+   ESP32 5V (from USB or Regulated 5V) ----------------> Board Power
+   ESP32 3.3V ----------------------------------------> Soil Sensor VCC
+
+
+Motor Driver (L298N Module):
+----------------------------
+[Left Motor: Pump 1]
+   Motor A Terminal 1  <---->  L298N OUT1
+   Motor A Terminal 2  <---->  L298N OUT2
+
+[Right Motor: Pump 2]
+   Motor B Terminal 1  <---->  L298N OUT3
+   Motor B Terminal 2  <---->  L298N OUT4
+
+[Control Pins - ESP32 to L298N]
+   ESP32 GPIO 26  ------------------>  L298N IN1
+   ESP32 GPIO 25  ------------------>  L298N IN2
+   ESP32 GPIO 14  ------------------>  L298N ENA (PWM for Pump 1)
+
+   ESP32 GPIO 27  ------------------>  L298N IN3
+   ESP32 GPIO 33  ------------------>  L298N IN4
+   ESP32 GPIO 12  ------------------>  L298N ENB (PWM for Pump 2)
+
+   (Jumper on ENA & ENB placed to enable both channels)
+
+
+Soil Moisture Sensor:
+---------------------
+   Soil Sensor VCC  ------------------>  ESP32 3.3V
+   Soil Sensor GND  ------------------>  ESP32 GND
+   Soil Sensor Analog Output --------->  ESP32 GPIO 32 (SOIL_PIN)
+
+
+Summary:
+--------
+- ESP32 controls two pumps using L298N through IN1–IN4 and PWM pins ENA, ENB.
+- Soil moisture sensor connected to GPIO 32 for analog readings.
+- All grounds are common between ESP32, L298N, and power supply.
+- Jumper on L298N enables internal 5V regulator for logic supply (if module provides it).
+- Ensure ESP32 is not powered from L298N’s 5V regulator; use USB or separate 5V regulated source.
+```
